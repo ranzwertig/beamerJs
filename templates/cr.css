@@ -1,0 +1,66 @@
+/*
+beamerJs is a OpenSource JS library for HTML5 presentations which 
+provides almost all LATEX beamer functions.
+
+Copyright (C) 2010  Christian Ranz <beamerjs@christianranz.com>
+All rights reserved.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+body {
+	font-family:corbel;
+	background-color:#EEEEEE;
+}
+header {
+	background-color:grey;
+	-webkit-border-top-left-radius: 15px;
+	-webkit-border-top-right-radius: 15px;
+	-moz-border-radius-topleft: 15px;
+	-moz-border-radius-topright: 15px;
+	background:#fff;
+	background:-moz-linear-gradient(0% 40% 90deg, #FFFFFF, #EEEEEE) repeat scroll 0 0 transparent;
+	border: 1px solid #DDDDDD;
+	border-bottom:none;
+}
+footer{
+	background-color:grey;
+	-webkit-border-bottom-left-radius: 15px;
+	-webkit-border-bottom-right-radius: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	-moz-border-radius-bottomright: 15px;
+	border: 1px solid #DDDDDD;
+	border-top:none;
+	background:#fff;
+	background:-moz-linear-gradient(0% 100% 90deg, #EEEEEE, #FFFFFF) repeat scroll 0 0 transparent;
+}
+.slide {
+	border-left: 1px solid #DDDDDD;
+	border-right: 1px solid #DDDDDD;
+	background-color:#fff;
+}
+/*elements*/
+#title {
+	color:#B00EC3;
+}
+em {
+	font-style:italic;
+	color:#B00EC3;
+}
+a {
+	text-decoration:none;
+	color: #000;
+}
+a:hover {
+	color:#B00EC3;
+}
