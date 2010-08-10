@@ -13,7 +13,9 @@ Author
 ------
 
 Christian Ranz - <beamerjs@christianranz.com>
+
 <http://www.christianranz.com>
+
 <http://twitter.com/ranzwertig>
 
 License
