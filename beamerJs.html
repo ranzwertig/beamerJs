@@ -21,14 +21,14 @@
 			<h2 id="subtitle"></h2>
 		</header>
 		
-		<section class="slide titelslide tocexclude">
+		<section class="slide titelslide">
 			<h1 class="title">beamerJs</h1>
 			<h2 class="subtitle">a LaTex beamer like JS presentation framework</h2>
 		</section>
 		
 		<section class="slide tableofcontents">
-			<h1 class="title">Content</h1>
-			<h2 class="subtitle">a LaTex beamer like JS presentation framework</h2>
+			<h1 class="title">Table of contents</h1>
+			<h2 class="subtitle"></h2>
 		</section>
 		
 		<section class="slide">
@@ -71,10 +71,13 @@
 					<em>&lt;section class="slide"&gt;</em>: Each slide is defined by it's own <em>&lt;section clsss="slide"&gt;</em>.
 					It is possible to add a title and a subtitle which are displayed in the header. 
 					<ul>
-						<li><em>titelslide</em>: If you add the class titelslide to the slide section the title and subtitle are
+						<li><em>class: titelslide</em>: If you add the class titelslide to the slide section the title and subtitle are
 							displayed centered on the slide.
 						</li>
-						<li><em>tableofcontents</em>: A slide which displays the TOC of the whole presentation.
+						<li><em>class: tableofcontents</em>: A slide which displays the TOC of the whole presentation. If the TOV is to long
+							to be shown on a single slide it is split and shown on more slides.
+						</li>
+						<li><em>class: tocexclude</em>: The class tocexclude excludes this slide from the TOC.
 						</li>
 					</ul>
 				</li>
@@ -82,49 +85,38 @@
 		</section>
 		
 		<section class="slide">
-			<h1 class="title">Markup</h1>
-			<h2 class="subtitle">Steps</h2>
+			<h1 class="title">beamerJs</h1>
+			<h2 class="subtitle">navigation</h2>
+			<ul>
+				<li>You can move to the next slide by: <em>space key or arrow right</em> or <em>left mouse button</em>.</li>
+				<li>You can move to the prev slide by: <em>arrow left</em> or <em>left mouse button</em>.</li>
+			</ul>
 		</section>
 		
 		<section class="slide">
-			<h1 class="title">Markup</h1>
-			<h2 class="subtitle">nu8mbered Steps</h2>
+			<h1 class="title">beamerJs</h1>
+			<h2 class="subtitle">steps</h2>
+			
+			<p>
+				Like in LaTex beamer you can show a slide in more than one <em>step</em>. Therefore you have to add the 
+				<em>class="step"</em> to a element.
+			</p>
+			<p class="step">
+				Example:
+			</p>			
+			<ul>
+				<li class="step">This is the second step.</li>
+				<li class="step">This is the third step.</li>
+			</ul>
 		</section>
+		
 		<section class="slide">
-			<h1 class="title">Markup</h1>
-			<h2 class="subtitle">nu8mbered Steps</h2>
-		</section>
-		<section class="slide">
-			<h1 class="title">Markup</h1>
-			<h2 class="subtitle">nu8mbered Steps</h2>
-		</section>
-		<section class="slide">
-			<h1 class="title">Markup</h1>
-			<h2 class="subtitle">nu8mbered Steps</h2>
-		</section>
-		<section class="slide">
-			<h1 class="title">Markup</h1>
-			<h2 class="subtitle">nu8mbered Steps</h2>
-		</section>
-		<section class="slide">
-			<h1 class="title">Markup</h1>
-			<h2 class="subtitle">nu8mbered Steps</h2>
-		</section>
-		<section class="slide">
-			<h1 class="title">Markup</h1>
-			<h2 class="subtitle">nu8mbered Steps</h2>
-		</section>
-		<section class="slide">
-			<h1 class="title">Markup</h1>
-			<h2 class="subtitle">nu8mbered Steps</h2>
-		</section>
-		<section class="slide">
-			<h1 class="title">Markup</h1>
-			<h2 class="subtitle">nu8mbered Steps</h2>
-		</section>
-		<section class="slide">
-			<h1 class="title">Markup</h1>
-			<h2 class="subtitle">nu8mbered Steps</h2>
+			<h1 class="title">beamerJs</h1>
+			<h2 class="subtitle">About the Author</h2>
+			
+			&copy; <a href="http://www.christianranz.com">Christian Ranz</a><br>
+			<a href="http://twitter.com/ranzwertig">Christian Ranz on Twitter</a>
+			
 		</section>
 
 		<footer>
