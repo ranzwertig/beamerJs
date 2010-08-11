@@ -9,7 +9,12 @@
 		<script type="text/javascript" src="src/script/beamerJs.js"></script>
 		<script>
 			$(document).ready(function() {
-				beamerJs.init();
+				beamerJs.init({
+					enablesteps : true,
+					autovcentercontent : true,
+					footershowslidenumber : true,
+					shownavigation : true
+				});
 			});
 		</script>
 		
@@ -117,6 +122,9 @@
 			&copy; <a href="http://www.christianranz.com">Christian Ranz</a><br>
 			<a href="http://twitter.com/ranzwertig">Christian Ranz on Twitter</a>
 			
+			<div class="step block">this is a block</div>
+			<div class="step exampleblock">this is a exampleblock</div>
+			<div class="step alertblock">this is a alertblock</div>
 		</section>
 
 		<footer>
