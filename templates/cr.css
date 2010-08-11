@@ -24,10 +24,10 @@ body {
 }
 header {
 	background-color:grey;
-	-webkit-border-top-left-radius: 15px;
-	-webkit-border-top-right-radius: 15px;
-	-moz-border-radius-topleft: 15px;
-	-moz-border-radius-topright: 15px;
+	-webkit-border-top-left-radius: 1em;
+	-webkit-border-top-right-radius: 1em;
+	-moz-border-radius-topleft: 1em;
+	-moz-border-radius-topright: 1em;
 	background:#fff;
 	background:-moz-linear-gradient(0% 40% 90deg, #FFFFFF, #EEEEEE) repeat scroll 0 0 transparent;
 	border: 1px solid #DDDDDD;
@@ -35,10 +35,10 @@ header {
 }
 footer{
 	background-color:grey;
-	-webkit-border-bottom-left-radius: 15px;
-	-webkit-border-bottom-right-radius: 15px;
-	-moz-border-radius-bottomleft: 15px;
-	-moz-border-radius-bottomright: 15px;
+	-webkit-border-bottom-left-radius: 1em;
+	-webkit-border-bottom-right-radius: 1em;
+	-moz-border-radius-bottomleft: 1em;
+	-moz-border-radius-bottomright: 1em;
 	border: 1px solid #DDDDDD;
 	border-top:none;
 	background:#fff;
@@ -63,4 +63,24 @@ a {
 }
 a:hover {
 	color:#B00EC3;
+}
+.block {
+	border: 1px solid #DDDDDD;
+	background:#fff;
+	background:-moz-linear-gradient(0% 100% 90deg, #EEEEEE, #FFFFFF) repeat scroll 0 0 transparent;
+	-webkit-border-radius: 0.2em;
+	-moz-border-radius: 0.2em;
+}
+.exampleblock {
+	border: 1px solid #DDDDDD;
+	background:#fff;
+	background:-moz-linear-gradient(0% 100% 90deg, #FCE6FF, #FFFFFF) repeat scroll 0 0 transparent;
+	-webkit-border-radius: 0.2em;
+	-moz-border-radius: 0.2em;
+}
+.alertblock {
+	border: 2px solid #B00EC3;
+	background:#fff;
+	-webkit-border-radius: 0.2em;
+	-moz-border-radius: 0.2em;
 }
