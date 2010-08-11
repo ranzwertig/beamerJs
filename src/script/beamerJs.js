@@ -24,6 +24,8 @@ beamerJs = {
 	autoVCenterContent : false,
 	footerShowSlidenumber : false,
 	showSlideNavigation : false,
+	hiddenStepsStyle : 'hidden', // hidden, transparent
+	hiddenStepsOpacity : 0.3,
 	// internal status
 	currentSlide : 0,
 	currentStep : 0,
@@ -43,7 +45,8 @@ beamerJs = {
 					beamerJs.autoVCenterContent = options.autovcentercontent;
 					beamerJs.footerShowSlidenumber = options.footershowslidenumber;
 					beamerJs.showSlideNavigation = options.shownavigation;
-					
+					beamerJs.hiddenStepsStyle = options.hiddenstepsstyle;
+					beamerJs.hiddenStepsOpacity = options.hiddenstepsopacity
 					// find all slides 
 					this.prepareSlides();
 					
@@ -222,18 +225,36 @@ beamerJs = {
 				},
 	showStep :	function(slide, step) {
 					$(slide.steps[step]).each(function() {
-						$(this).show();
+						if (beamerJs.hiddenStepsStyle == 'hidden') {
+								$(this).show();
+							}
+							else if (beamerJs.hiddenStepsStyle == 'transparent') {
+								$(this).show();
+								$(this).css('opacity', 1);
+							}
 					});
 				},
 	hideStep :	function(slide, step) {
 					$(slide.steps[step]).each(function() {
-						$(this).hide();
+						if (beamerJs.hiddenStepsStyle == 'hidden') {
+								$(this).hide();
+							}
+							else if (beamerJs.hiddenStepsStyle == 'transparent') {
+								$(this).show();
+								$(this).css('opacity', beamerJs.hiddenStepsOpacity);
+							}
 					});
 				},
 	hideAllSteps : function() {
 					if (beamerJs.enableSteps) {
 						$('[class^=step]').each(function() {
-							$(this).hide();
+							if (beamerJs.hiddenStepsStyle == 'hidden') {
+								$(this).hide();
+							}
+							else if (beamerJs.hiddenStepsStyle == 'transparent') {
+								$(this).show();
+								$(this).css('opacity', beamerJs.hiddenStepsOpacity);
+							}
 						});
 					}
 				},
