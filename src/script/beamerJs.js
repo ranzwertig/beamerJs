@@ -19,10 +19,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 beamerJs = {
+	// options
+	enableSteps : true,
+	autoVCenterContent : false,
+	footerShowSlidenumber : false,
+	showSlideNavigation : false,
+	// internal status
 	currentSlide : 0,
 	currentStep : 0,
 	prevSlide : -1,
-	enableSteps : true,
 	tableOfContents : new Array(),
 	tableOfContentsSize : 0,
 	tocSlideNumber : -1,
@@ -30,25 +35,47 @@ beamerJs = {
 	tocCurrent : 0,
 	slideH : 0,
 	slideW : 0,
-	slides 	: 	new Array(),
-	init 	: 	function() {
+	slides : new Array(),
+	init : function(options) {
+	
+					// set options
+					beamerJs.enableSteps = options.enablesteps;
+					beamerJs.autoVCenterContent = options.autovcentercontent;
+					beamerJs.footerShowSlidenumber = options.footershowslidenumber;
+					beamerJs.showSlideNavigation = options.shownavigation;
+					
+					// find all slides 
 					this.prepareSlides();
-					$(document).keyup(beamerJs.keyEvent);
+					
+					// if slide is selected by url hash
 					if (window.location.hash) {
 						var slide = parseInt(window.location.hash.replace('#',''));
 						beamerJs.currentSlide = slide;
-						
+						// set toc
 						if (beamerJs.tocSlideNumber < slide && beamerJs.tocSlideNumber != -1) {
 							beamerJs.renderSlide(beamerJs.slides[beamerJs.tocSlideNumber]);
 							beamerJs.tocCurrent = beamerJs.tocSlides.length - 1;
 							beamerJs.hideAllSlides();
 						}
-						
+						// render selected slide
 						beamerJs.renderSlide(beamerJs.slides[slide]);
 					}
-					else 
+					else {
+						// else render first slide
 						beamerJs.renderSlide(beamerJs.slides[0]);
+					}
+					
+					beamerJs.showSlidenumber();
+					beamerJs.showNavigation();
+					
+					// hide all steps on all slides
 					beamerJs.hideAllSteps();
+					
+					// bind key, mouse and resize events
+					beamerJs.initEvents();
+				},
+	initEvents : function () {
+					$(document).keyup(beamerJs.keyEvent);
 					$(window).resize(beamerJs.onResize);
 					$(document).click(function(e) {	
 						var rightclick;
@@ -205,15 +232,15 @@ beamerJs = {
 				},
 	keyEvent :	function(e) {
 					switch (e.keyCode) {
-						case 32:
-						case 34:
-						case 39:
-						case 40:
+						case 32: // space
+						case 34: // page down
+						case 39: // right arrow
+						case 40: // down arrow
 							return beamerJs.showSlide('next');
 						
-						case 33:
-						case 37:
-						case 38:
+						case 33: // page up
+						case 37: // left arrow
+						case 38: // up arrow
 							return beamerJs.showSlide('prev');
 					}
 				},
@@ -240,14 +267,14 @@ beamerJs = {
 						
 						var tocSlides = beamerJs.tableOfContentsSize / itemsPerSlide;
 						
-						if ((tocSlides - parseInt(tocSlides)) > 0)
+						if ((tocSlides - parseInt(tocSlides)) > 0 && itemsPerSlide < beamerJs.tableOfContentsSize)
 							tocSlides = parseInt(tocSlides) + 1;
 
 						var start = 0;
 						beamerJs.tocSlides = new Array();
 						for (var i = 0; i < tocSlides; i++) {							
 							beamerJs.tocSlides.push(beamerJs.getTableOfContentsList(itemsPerSlide, start));
-							start = start + itemsPerSlide + 1;
+							start = start + itemsPerSlide - 1;
 						}
 						
 						$(slide.self).html(beamerJs.tocSlides[beamerJs.tocCurrent]);
@@ -396,5 +423,15 @@ beamerJs = {
 					for (z in obj)
 						i++;
 					return i;
+				},
+	showSlidenumber : function() {
+					if (beamerJs.footerShowSlidenumber) {
+						
+					}
+				},
+	showNavigation : function() {
+					if (beamerJs.showSlideNavigation) {
+						
+					}
 				}
 };
