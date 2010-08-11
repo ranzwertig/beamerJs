@@ -112,3 +112,25 @@ p, pre, li {
 pre {
 	font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace !important;
 }
+/*slide elements*/
+.block {
+	display:block;
+	min-height:1em;
+	padding:0.5em;
+	margin: 0.8em 0 0.8em 0;
+}
+.exampleblock {
+	display:block;
+	min-height:1em;
+	padding:0.5em;
+	margin: 0.8em 0 0.8em 0;
+	font-size:0.8em;
+}
+.alertblock {
+	display:block;
+	min-height:1em;
+	padding:0.5em;
+	margin: 0.8em 0 0.8em 0;
+	font-size:1em;
+	font-weight:bold;
+}
