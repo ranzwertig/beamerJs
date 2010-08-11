@@ -338,6 +338,26 @@ beamerJs = {
 					$('body').css('padding-top', space / 2);
 					$('body').css('height', winH - space / 2);
 					$('body').css('font-size', (winH / 600) - 0.2 + 'em');
+					
+					if (beamerJs.autoVCenterContent) {
+						var children = $(slide.self).children();
+						$(slide.self).html('');
+						var wrapper = $('<div class="wrapper"></div>');
+						$(wrapper).appendTo(slide.self);
+						$(wrapper).append(children);
+						
+						beamerJs.showStep(slide, slide.maxSteps - 1);
+						var wrapperHeight = $(wrapper).height();
+						beamerJs.hideStep(slide,  slide.maxSteps - 1);
+						
+						var offset = parseInt(( beamerJs.slideH / 2 ) - ( wrapperHeight / 2));
+						
+						if (slide.isTitleSlide)
+							offset = offset - slideH * 0.1 - padding * 2;
+						
+						$(wrapper).css('margin-top',offset);
+					}
+					
 				},
 	onResize : function() {
 					beamerJs.sizeSlide(beamerJs.slides[beamerJs.currentSlide]);
