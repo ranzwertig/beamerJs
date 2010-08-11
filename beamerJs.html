@@ -13,7 +13,9 @@
 					enablesteps : true,
 					autovcentercontent : true,
 					footershowslidenumber : true,
-					shownavigation : true
+					shownavigation : true,
+					hiddenstepsstyle : 'transparent',
+					hiddenstepsopacity : 0.2
 				});
 			});
 		</script>
@@ -95,6 +97,54 @@
 			<ul>
 				<li>You can move to the next slide by: <em>space key or arrow right</em> or <em>left mouse button</em>.</li>
 				<li>You can move to the prev slide by: <em>arrow left</em> or <em>left mouse button</em>.</li>
+			</ul>
+		</section>
+		
+		
+		<section class="slide">
+			<h1 class="title">Options</h1>
+			<h2 class="subtitle">beamerJs init</h2>
+			
+			<p>
+				beamerJs is initialised by
+			</p>
+			
+			<pre>
+beamerJs.init({
+	enablesteps : true,
+	autovcentercontent : true,
+	footershowslidenumber : true,
+	shownavigation : true,
+	hiddenstepsstyle : 'transparent',
+	hiddenstepsopacity : 0.2
+});
+			</pre>
+			
+		</section>
+		
+		<section class="slide">
+			<h1 class="title">Options</h1>
+			<h2 class="subtitle">Description</h2>
+			
+			<ul>
+				<li>
+					<em>enablesteps</em>: enables the step feature (true/false)
+				</li>
+				<li>
+					<em>autovcentercontent</em>: center the content vertically (true/false)
+				</li>
+				<li>
+					<em>footershowslidenumber</em>: show the current slidenumber and the max slidenumber in the footer (true/false)
+				</li>
+				<li>
+					<em>shownavigation</em>: show the navigation (true/false)
+				</li>
+				<li>
+					<em>hiddenstepsstyle</em>: defines how hidden steps should show up ('hidden', 'transparent')
+				</li>
+				<li>
+					<em>hiddenstepsopacity</em>: defines the opacity if <em>hiddenstepsstyle</em> is 'transparent'  ( 0 &lt; hiddenstepsopacity &gt; 1)
+				</li>
 			</ul>
 		</section>
 		
