@@ -226,12 +226,12 @@ beamerJs = {
 	showStep :	function(slide, step) {
 					$(slide.steps[step]).each(function() {
 						if (beamerJs.hiddenStepsStyle == 'hidden') {
-								$(this).show();
-							}
-							else if (beamerJs.hiddenStepsStyle == 'transparent') {
-								$(this).show();
-								$(this).css('opacity', 1);
-							}
+							$(this).show();
+						}
+						else if (beamerJs.hiddenStepsStyle == 'transparent') {
+							$(this).show();
+							$(this).css('opacity', 1);
+						}
 					});
 				},
 	hideStep :	function(slide, step) {
