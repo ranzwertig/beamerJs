@@ -22,7 +22,7 @@ beamerJs = {
 	currentSlide : 0,
 	currentStep : 0,
 	prevSlide : -1,
-	enableSteps : false,
+	enableSteps : true,
 	tableOfContents : new Array(),
 	tableOfContentsSize : 0,
 	tocSlideNumber : -1,
@@ -129,13 +129,13 @@ beamerJs = {
 				},
 	showSlide :	function(num) {
 					if (beamerJs.enableSteps) {
-						if (num == 'next' && beamerJs.currentStep < beamerJs.slides[beamerJs.currentSlide].maxSteps) {
-							beamerJs.hideStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep + 1);
-							beamerJs.showStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep);
+						if (num == 'next' && beamerJs.currentStep < beamerJs.slides[beamerJs.currentSlide].maxSteps -1 && beamerJs.slides[beamerJs.currentSlide].maxSteps > 1) {
+							beamerJs.hideStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep);
+							beamerJs.showStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep + 1);
 							beamerJs.currentStep = beamerJs.currentStep + 1;
 							return;
 						}
-						if (num == 'prev' && beamerJs.currentStep > 0) {
+						if (num == 'prev' && beamerJs.currentStep > 0 && beamerJs.slides[beamerJs.currentSlide].maxSteps > 1) {
 							beamerJs.hideStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep);
 							beamerJs.showStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep - 1);
 							beamerJs.currentStep = beamerJs.currentStep - 1;
@@ -166,7 +166,7 @@ beamerJs = {
 							}
 							else {
 								if (beamerJs.enableSteps) {
-									beamerJs.currentStep = beamerJs.slides[beamerJs.currentSlide].maxSteps;
+									beamerJs.currentStep = beamerJs.slides[beamerJs.currentSlide].maxSteps - 1;
 								}
 							}
 						}
