@@ -6,13 +6,27 @@ OpenSource JS library for HTML5 presentations which provides almost all LATEX be
 Demo and Documentation
 ----------------------
 
+Visit: http://www.christianranz.com/project/beamerjs
 
+Release Notes
+-------------
+
+1.0.1
+
+* implemented basic functions to show slides
+* added theme cr
+* added table of contents feature
+* added step feature
+* added slide titles and subtitles
+* added example slides
 
 
 Author
 ------
 
-Christian Ranz - <beamerjs@christianranz.com>
+Christian Ranz 
+
+<beamerjs@christianranz.com>
 
 <http://www.christianranz.com>
 
