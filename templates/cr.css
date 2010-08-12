@@ -30,12 +30,13 @@ header {
 	-moz-border-radius-topleft: 1em;
 	-moz-border-radius-topright: 1em;
 	background:#fff;
-	background:-moz-linear-gradient(0% 40% 90deg, #FFFFFF, #EEEEEE) repeat scroll 0 0 transparent;
-	background: -webkit-gradient(linear, 0% 0%, 0% 60%, from(#EEEEEE), to(#FFFFFF)); 
+	background:-moz-linear-gradient(0% 80% 90deg, #FFFFFF, #EEEEEE) repeat scroll 0 0 transparent;
+	background: -webkit-gradient(linear, 0% 0%, 0% 80%, from(#EEEEEE), to(#FFFFFF)); 
 	border: 1px solid #DDDDDD;
 	border-bottom:none;
 }
 footer{
+	font-size:0.7em;
 	background-color:grey;
 	-webkit-border-bottom-left-radius: 1em;
 	-webkit-border-bottom-right-radius: 1em;

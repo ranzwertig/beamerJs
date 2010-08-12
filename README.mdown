@@ -11,6 +11,15 @@ Visit: <http://www.christianranz.com/project/beamerjs>
 Release Notes
 -------------
 
+0.1.1
+
+* slidenavigation 
+* slidenumbers
+* link table of contents items
+* fixed some toc bugs
+* cleaned up init options
+* some cr template changes
+
 0.1.0
 
 * implemented basic functions to show slides
@@ -20,6 +29,14 @@ Release Notes
 * added slide titles and subtitles
 * added example slides
 
+Browser Compatibility
+---------------------
+
+currently runs on FF 3.6+ without issues
+
+and on newer Webkit browsers with some small issues.
+
+If you find any issues on any Browser please report them. Thanks.
 
 Author
 ------

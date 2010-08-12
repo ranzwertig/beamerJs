@@ -6,7 +6,7 @@
 		<link type="text/css" rel="stylesheet" href="src/css/beamerJs.css"/>
 		<link type="text/css" rel="stylesheet" href="templates/cr.css"/>
 		<script type="text/javascript" src="src/script/jquery-1.4.2.min.js"></script>
-		<script type="text/javascript" src="src/script/beamerJs.js"></script>
+	    <script type="text/javascript" src="src/script/beamerJs.js"></script>
 		<script>
 			$(document).ready(function() {
 				beamerJs.init({
@@ -14,7 +14,7 @@
 					tableofcontents : {makelinks : true},
 					autovcentercontent : true,
 					slidenumber : {enabled : true, container : 'body'},
-					navigation : {enabled :true, container : 'body', controls : 'ctrl_first,ctrl_prev,ctrl_start,ctrl_stop,ctrl_tableofcontents,ctrl_next,ctrl_last'},
+					navigation : {enabled :true, container : 'body', controls : 'ctrl_first,ctrl_prev,ctrl_next,ctrl_last,ctrl_start,ctrl_stop,ctrl_tableofcontents'},
 					slidetimer : {enabled : true, defaulttime : 3}
 				});
 			});
@@ -37,6 +37,7 @@
 			<h1 class="title">Table of contents</h1>
 			<h2 class="subtitle"></h2>
 		</section>
+		
 		
 		<section class="slide">
 			<h1 class="title">beamerJs</h1>
@@ -211,7 +212,9 @@ beamerJs.init({
 
 
 		<footer>
-			&copy; <a href="http://www.christianranz.com">Christian Ranz</a>
+			<span style="float:left;">&copy; 2010 <a href="http://www.christianranz.com">Christian Ranz</a></span>
+			<span style="float:right;"><a href="http://twitter.com/ranzwertig">ranzwertig @ Twitter</a></span><br>
+			<span style="float:right;"><a href="http://www.christianranz.com/project/beamerjs">beamerJs Project</a></span><br>
 		</footer>
 	</body>
 </html>
