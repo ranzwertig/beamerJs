@@ -10,12 +10,12 @@
 		<script>
 			$(document).ready(function() {
 				beamerJs.init({
-					enablesteps : true,
+					steps : {enabled : true, hiddenstepsstyle : 'transparent', hiddenstepsopacity : 0.3},
 					autovcentercontent : true,
-					footershowslidenumber : true,
-					shownavigation : true,
-					hiddenstepsstyle : 'transparent',
-					hiddenstepsopacity : 0.2
+					slidenumber : {enabled : true, container : 'body'},
+					showslidenumber : true,
+					navigation : {enabled :true, container : 'body', controls : 'first,prev,start,stop,next,last'},
+					slidetimer : {enabled : true, defaulttime : 3},
 				});
 			});
 		</script>

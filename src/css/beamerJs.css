@@ -116,6 +116,23 @@ p, pre, li {
 #thetableofcontents {
 
 }
+#slidenumber {
+	position:fixed;
+	bottom:10px;
+	left:10px;
+	color:grey;
+}
+/*navigation styles*/
+#navigation {
+	position:fixed;
+	bottom:10px;
+	right:10px;
+	color:grey;
+}
+.navigation-control {
+	cursor:pointer;
+	float:left;
+}
 pre {
 	font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace !important;
 }

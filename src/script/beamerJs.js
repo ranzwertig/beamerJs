@@ -22,10 +22,15 @@ beamerJs = {
 	// options
 	enableSteps : true,
 	autoVCenterContent : false,
-	footerShowSlidenumber : false,
+	showSlidenumber : false,
+	slideNumberContainer : 'body',
 	showSlideNavigation : false,
+	slideNavigationContainer : 'body',
+	slideNavigationControls : 'first,prev,play,pause,next,last',
 	hiddenStepsStyle : 'hidden', // hidden, transparent
 	hiddenStepsOpacity : 0.3,
+	slideTimerDefault : 1,
+	enableSlideTimer : false,
 	// internal status
 	currentSlide : 0,
 	currentStep : 0,
@@ -41,35 +46,33 @@ beamerJs = {
 	init : function(options) {
 	
 					// set options
-					beamerJs.enableSteps = options.enablesteps;
+					beamerJs.enableSteps = options.steps.enabled;
 					beamerJs.autoVCenterContent = options.autovcentercontent;
-					beamerJs.footerShowSlidenumber = options.footershowslidenumber;
-					beamerJs.showSlideNavigation = options.shownavigation;
-					beamerJs.hiddenStepsStyle = options.hiddenstepsstyle;
-					beamerJs.hiddenStepsOpacity = options.hiddenstepsopacity
+					beamerJs.showSlidenumber = options.slidenumber.enabled;
+					beamerJs.slideNumberContainer = options.slidenumber.container;
+					beamerJs.showSlideNavigation = options.navigation.enabled;
+					beamerJs.slideNavigationContainer = options.navigation.container;
+					beamerJs.slideNavigationControls = options.navigation.controls;
+					beamerJs.hiddenStepsStyle = options.steps.hiddenstepsstyle;
+					beamerJs.hiddenStepsOpacity = options.steps.hiddenstepsopacity
+					beamerJs.slideTimerDefault = options.slidetimer.enabled;
+					beamerJs.enableSlideTimer = options.slidetimer.defaulttime;
+					
 					// find all slides 
 					this.prepareSlides();
 					
 					// if slide is selected by url hash
 					if (window.location.hash) {
 						var slide = parseInt(window.location.hash.replace('#',''));
-						beamerJs.currentSlide = slide;
-						// set toc
-						if (beamerJs.tocSlideNumber < slide && beamerJs.tocSlideNumber != -1) {
-							beamerJs.renderSlide(beamerJs.slides[beamerJs.tocSlideNumber]);
-							beamerJs.tocCurrent = beamerJs.tocSlides.length - 1;
-							beamerJs.hideAllSlides();
-						}
-						// render selected slide
-						beamerJs.renderSlide(beamerJs.slides[slide]);
+						beamerJs.showSlide(slide);
 					}
 					else {
 						// else render first slide
 						beamerJs.renderSlide(beamerJs.slides[0]);
 					}
 					
-					beamerJs.showSlidenumber();
-					beamerJs.showNavigation();
+					beamerJs.doShowSlidenumber();
+					beamerJs.doShowNavigation();
 					
 					// hide all steps on all slides
 					beamerJs.hideAllSteps();
@@ -93,16 +96,7 @@ beamerJs = {
 						else return beamerJs.showSlide('next');
 					});
 					$(document).bind('dblclick',function() {
-						var rightclick;
-						if (!e) var e = window.event;
-						if (e.which) rightclick = (e.which == 3);
-						else if (e.button) rightclick = (e.button == 2);
-						
-						if (rightclick) { 
-							beamerJs.showSlide('prev');
-							return false;
-						}
-						else return beamerJs.showSlide('next');
+						return false;
 					});
 				},
 	prepareSlides : function() {
@@ -215,6 +209,15 @@ beamerJs = {
 					}
 					else {
 						beamerJs.currentSlide = num;
+						// set toc when slide is changed by slidenumber
+						if (beamerJs.tocSlideNumber < num && beamerJs.tocSlideNumber != -1) {
+							beamerJs.renderSlide(beamerJs.slides[beamerJs.tocSlideNumber]);
+							beamerJs.tocCurrent = beamerJs.tocSlides.length - 1;
+							beamerJs.hideAllSlides();
+						}
+						else if (beamerJs.tocSlideNumber > num) {
+							beamerJs.tocCurrent = 0;
+						}
 					}					
 					$(beamerJs.slides[beamerJs.prevSlide].self).hide();
 					beamerJs.renderSlide(beamerJs.slides[beamerJs.currentSlide]);
@@ -283,7 +286,8 @@ beamerJs = {
 					$(slide.self).show();
 					$('footer').show();
 					beamerJs.sizeSlide(slide);
-					
+					// update slidenumer on slide change
+					beamerJs.doShowSlidenumber();
 					if (slide.isTitleSlide) {
 						$(slide.self).find('.title').show();
 						$(slide.self).find('.subtitle').show();
@@ -326,7 +330,7 @@ beamerJs = {
 					
 				},
 	sizeSlide : function(slide) {
-					var winH, winW, slideH, slideW, space, padding , maxPadding, totalHeight;
+					var winH, winW, slideH, slideW, space, padding , maxPadding, totalHeight, ratio;
 					
 					maxPadding = 15;
 					padding = 15;
@@ -339,9 +343,10 @@ beamerJs = {
 					winH = $(window).height();
 					winW = $(window).width();
 					
-					slideH = winH - space;
-					
-					slideW = ( slideH / 3 ) * 4;
+					if (beamerJs.slideH > winH || beamerJs.slideH < winH - space) {
+						slideH = winH - space;
+						slideW = ( ( winH - space ) / 3 ) * 4;
+					}
 					
 					padding = padding * (winH / 600);
 					padding = (padding > maxPadding)?maxPadding:padding;
@@ -477,14 +482,43 @@ beamerJs = {
 						i++;
 					return i;
 				},
-	showSlidenumber : function() {
-					if (beamerJs.footerShowSlidenumber) {
-						
+	doShowSlidenumber : function() {
+					if (beamerJs.showSlidenumber) {
+						if (!$('#slidenumber').length) {
+							var number = '<span id="slidenumber">' + (beamerJs.currentSlide + 1) + "/" + beamerJs.slides.length + '</span>';
+							$(beamerJs.slideNumberContainer).append(number);
+						}
+						else {
+							$('#slidenumber').html((beamerJs.currentSlide + 1) + "/" + beamerJs.slides.length);
+						}
 					}
 				},
-	showNavigation : function() {
+	doShowNavigation : function() {
 					if (beamerJs.showSlideNavigation) {
-						
+						beamerJs.slideNavigationContainer;
+						beamerJs.slideNavigationControls;
+						if (!$('#navigation').length) {
+							$(beamerJs.slideNavigationContainer).append('<span id="navigation"></span>');
+							var controls = beamerJs.slideNavigationControls.split(',');
+							for (item in controls) {
+								var ctrl = controls[item];
+								$('#navigation').append('<span title="' + ctrl + '" id="' + ctrl + '" class="navigation-control"></span>');
+								$('#' + ctrl).click(function() {
+									var action = $(this).attr('id');
+									switch (action) {
+										case 'first': beamerJs.showSlide(0);break;
+										case 'prev':beamerJs.showSlide('prev');break;
+										case 'start':;break;
+										case 'pause':;break;
+										case 'next':beamerJs.showSlide('next');;break;
+										case 'last':beamerJs.showSlide(beamerJs.slides.length - 1);break;
+									}
+									
+									// return false to stop event chain
+									return false;
+								});
+							}
+						}
 					}
 				}
 };

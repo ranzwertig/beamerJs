@@ -88,3 +88,31 @@ a:hover {
 	-webkit-border-radius: 0.2em;
 	-moz-border-radius: 0.2em;
 }
+/*navigation styles*/
+.navigation-control {
+	width:32px;
+	height:32px;
+	display:block;
+	opacity:0.5;
+}
+.navigation-control:hover {
+	opacity:1;
+}
+#first {
+	background: transparent url(cr/first.gif);
+}
+#prev {
+	background: transparent url(cr/prev.gif);
+}
+#start {
+	background: transparent url(cr/start.gif);
+}
+#stop {
+	background: transparent url(cr/stop.gif);
+}
+#next {
+	background: transparent url(cr/next.gif);
+}
+#last {
+	background: transparent url(cr/last.gif);
+}
