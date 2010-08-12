@@ -31,6 +31,7 @@ beamerJs = {
 	hiddenStepsOpacity : 0.3,
 	slideTimerDefault : 1,
 	enableSlideTimer : false,
+	tocMakeLinks : false,
 	// internal status
 	currentSlide : 0,
 	currentStep : 0,
@@ -57,7 +58,7 @@ beamerJs = {
 					beamerJs.hiddenStepsOpacity = options.steps.hiddenstepsopacity
 					beamerJs.slideTimerDefault = options.slidetimer.enabled;
 					beamerJs.enableSlideTimer = options.slidetimer.defaulttime;
-					
+					beamerJs.tocMakeLinks = options.tableofcontents.makelinks;
 					// find all slides 
 					this.prepareSlides();
 					
@@ -83,13 +84,18 @@ beamerJs = {
 	initEvents : function () {
 					$(document).keyup(beamerJs.keyEvent);
 					$(window).resize(beamerJs.onResize);
-					$(document).click(function(e) {	
-						var rightclick;
-						if (!e) var e = window.event;
-						if (e.which) rightclick = (e.which == 3);
-						else if (e.button) rightclick = (e.button == 2);
+					$(document).click(function(event) {	
+					if (event.which == null)
+						/* IE case */
+						button = (event.button < 2) ? 'LEFT' :
+							((event.button == 4) ? 'MIDDLE' : 'RIGHT');
+					else
+					   /* All others */
+					   button = (event.which < 2) ? 'LEFT' :
+								 ((event.which == 2) ? 'MIDDLE' : 'RIGHT');
+
 						
-						if (rightclick) { 
+						if (button == 'RIGHT') { 
 							beamerJs.showSlide('prev');
 							return false;
 						}
@@ -169,13 +175,13 @@ beamerJs = {
 							beamerJs.hideStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep);
 							beamerJs.showStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep + 1);
 							beamerJs.currentStep = beamerJs.currentStep + 1;
-							return;
+							return false;
 						}
 						if (num == 'prev' && beamerJs.currentStep > 0 && beamerJs.slides[beamerJs.currentSlide].maxSteps > 1) {
 							beamerJs.hideStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep);
 							beamerJs.showStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep - 1);
 							beamerJs.currentStep = beamerJs.currentStep - 1;
-							return;
+							return false;
 						}
 					}
 					beamerJs.prevSlide = beamerJs.currentSlide;
@@ -225,6 +231,7 @@ beamerJs = {
 					if (beamerJs.enableSteps) {
 						beamerJs.showStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep);
 					}
+					return false;
 				},
 	showStep :	function(slide, step) {
 					$(slide.steps[step]).each(function() {
@@ -315,6 +322,13 @@ beamerJs = {
 						}
 						
 						$(slide.self).html(beamerJs.tocSlides[beamerJs.tocCurrent]);
+						
+						if (beamerJs.tocMakeLinks)
+							$('.navigation-link').click(function() {
+								var targetSlide = parseInt($(this).attr('href').replace('#',''));
+								beamerJs.showSlide(targetSlide);
+								return false;
+							});
 						
 						$('#title').html('');
 						$('#subtitle').html('');
@@ -411,7 +425,9 @@ beamerJs = {
 								count++;
 							}
 							if (typeof beamerJs.slides[i].subtitle != 'undefined' && beamerJs.slides[i].subtitle != null) {
-								var subtitle = beamerJs.slides[i].subtitle;
+								var subtitle = new Object();
+								subtitle.text = beamerJs.slides[i].subtitle;
+								subtitle.slide = i;								
 								titles[title].push(subtitle);
 								count++;
 							}
@@ -435,7 +451,7 @@ beamerJs = {
 									s--;
 								}
 							}
-							if (ct < start) {
+							if (ct < start || toc[title].length == 0) {
 								delete toc[title];
 								ct++;
 							}
@@ -454,7 +470,10 @@ beamerJs = {
 							var subtitles = toc[title];
 							for (var i = 0; i < subtitles.length; i++) {
 								if (count == max) break;
-								li += '<li>' + subtitles[i] + '</li>';
+								if (beamerJs.tocMakeLinks) 
+									li += '<li><a href="#' + subtitles[i].slide + '" class="navigation-link">' + subtitles[i].text + '</a></li>';
+								else
+									li += '<li>' + subtitles[i] + '</li>';
 								count++;
 							}
 							li += '</ul>';

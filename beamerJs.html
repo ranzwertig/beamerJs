@@ -11,11 +11,11 @@
 			$(document).ready(function() {
 				beamerJs.init({
 					steps : {enabled : true, hiddenstepsstyle : 'transparent', hiddenstepsopacity : 0.3},
+					tableofcontents : {makelinks : true},
 					autovcentercontent : true,
 					slidenumber : {enabled : true, container : 'body'},
-					showslidenumber : true,
 					navigation : {enabled :true, container : 'body', controls : 'first,prev,start,stop,next,last'},
-					slidetimer : {enabled : true, defaulttime : 3},
+					slidetimer : {enabled : true, defaulttime : 3}
 				});
 			});
 		</script>
@@ -28,7 +28,7 @@
 			<h2 id="subtitle"></h2>
 		</header>
 		
-		<section class="slide titelslide">
+		<section class="slide titelslide ">
 			<h1 class="title">beamerJs</h1>
 			<h2 class="subtitle">a LaTex beamer like JS presentation framework</h2>
 		</section>

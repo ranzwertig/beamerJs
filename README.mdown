@@ -6,7 +6,7 @@ OpenSource JS library for HTML5 presentations which provides almost all LATEX be
 Demo and Documentation
 ----------------------
 
-Visit: http://www.christianranz.com/project/beamerjs
+Visit: <http://www.christianranz.com/project/beamerjs>
 
 Release Notes
 -------------

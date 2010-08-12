@@ -22,6 +22,7 @@ body {
 	font-family:corbel;
 	background-color:#EEEEEE;
 }
+/*slide*/
 header {
 	background-color:grey;
 	-webkit-border-top-left-radius: 1em;
@@ -51,10 +52,14 @@ footer{
 	border-right: 1px solid #DDDDDD;
 	background-color:#fff;
 }
-/*elements*/
+/*titles*/
 #title {
 	color:#B00EC3;
 }
+.title {
+	text-shadow: #c0c0c0 3px 3px 3px;
+}
+/*text styling*/
 em {
 	font-style:italic;
 	color:#B00EC3;
@@ -66,6 +71,7 @@ a {
 a:hover {
 	color:#B00EC3;
 }
+/*blocks*/
 .block {
 	border: 1px solid #DDDDDD;
 	background:#fff;
