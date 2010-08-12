@@ -30,6 +30,7 @@ header {
 	-moz-border-radius-topright: 1em;
 	background:#fff;
 	background:-moz-linear-gradient(0% 40% 90deg, #FFFFFF, #EEEEEE) repeat scroll 0 0 transparent;
+	background: -webkit-gradient(linear, 0% 0%, 0% 60%, from(#EEEEEE), to(#FFFFFF)); 
 	border: 1px solid #DDDDDD;
 	border-bottom:none;
 }
@@ -43,6 +44,7 @@ footer{
 	border-top:none;
 	background:#fff;
 	background:-moz-linear-gradient(0% 100% 90deg, #EEEEEE, #FFFFFF) repeat scroll 0 0 transparent;
+	background: -webkit-gradient(linear, 0% 0%, 0% 50%, from(#FFFFFF), to(#EEEEEE)); 
 }
 .slide {
 	border-left: 1px solid #DDDDDD;
@@ -68,6 +70,7 @@ a:hover {
 	border: 1px solid #DDDDDD;
 	background:#fff;
 	background:-moz-linear-gradient(0% 100% 90deg, #EEEEEE, #FFFFFF) repeat scroll 0 0 transparent;
+	background: -webkit-gradient(linear, 0% 0%, 0% 50%, from(#FFFFFF), to(#EEEEEE));
 	-webkit-border-radius: 0.2em;
 	-moz-border-radius: 0.2em;
 }
@@ -75,6 +78,7 @@ a:hover {
 	border: 1px solid #DDDDDD;
 	background:#fff;
 	background:-moz-linear-gradient(0% 100% 90deg, #FCE6FF, #FFFFFF) repeat scroll 0 0 transparent;
+	background: -webkit-gradient(linear, 0% 0%, 0% 50%, from(#FFFFFF), to(#FCE6FF));
 	-webkit-border-radius: 0.2em;
 	-moz-border-radius: 0.2em;
 }
