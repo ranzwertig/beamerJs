@@ -11,7 +11,7 @@ Visit: http://www.christianranz.com/project/beamerjs
 Release Notes
 -------------
 
-1.0.1
+0.1.0
 
 * implemented basic functions to show slides
 * added theme cr
