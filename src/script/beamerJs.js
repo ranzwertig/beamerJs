@@ -521,16 +521,17 @@ beamerJs = {
 							var controls = beamerJs.slideNavigationControls.split(',');
 							for (item in controls) {
 								var ctrl = controls[item];
-								$('#navigation').append('<span title="' + ctrl + '" id="' + ctrl + '" class="navigation-control"></span>');
+								$('#navigation').append('<span title="' + ctrl.replace('ctrl_','') + '" id="' + ctrl + '" class="navigation-control"></span>');
 								$('#' + ctrl).click(function() {
 									var action = $(this).attr('id');
 									switch (action) {
-										case 'first': beamerJs.showSlide(0);break;
-										case 'prev':beamerJs.showSlide('prev');break;
-										case 'start':;break;
-										case 'pause':;break;
-										case 'next':beamerJs.showSlide('next');;break;
-										case 'last':beamerJs.showSlide(beamerJs.slides.length - 1);break;
+										case 'ctrl_first': beamerJs.showSlide(0);break;
+										case 'ctrl_prev':beamerJs.showSlide('prev');break;
+										case 'ctrl_start':;break;
+										case 'ctrl_pause':;break;
+										case 'ctrl_next':beamerJs.showSlide('next');;break;
+										case 'ctrl_last':beamerJs.showSlide(beamerJs.slides.length - 1);break;
+										case 'ctrl_tableofcontents':beamerJs.tocCurrent = 0;beamerJs.showSlide(beamerJs.tocSlideNumber);break;
 									}
 									
 									// return false to stop event chain

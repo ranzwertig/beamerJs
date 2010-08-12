@@ -104,21 +104,24 @@ a:hover {
 .navigation-control:hover {
 	opacity:1;
 }
-#first {
+#ctrl_first {
 	background: transparent url(cr/first.gif);
 }
-#prev {
+#ctrl_prev {
 	background: transparent url(cr/prev.gif);
 }
-#start {
+#ctrl_start {
 	background: transparent url(cr/start.gif);
 }
-#stop {
+#ctrl_stop {
 	background: transparent url(cr/stop.gif);
 }
-#next {
+#ctrl_next {
 	background: transparent url(cr/next.gif);
 }
-#last {
+#ctrl_last {
 	background: transparent url(cr/last.gif);
+}
+#ctrl_tableofcontents {
+	background: transparent url(cr/tree.gif);
 }
