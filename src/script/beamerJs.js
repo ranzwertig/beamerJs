@@ -33,6 +33,9 @@ beamerJs = {
 	enableSlideTimer : false,
 	tocMakeLinks : false,
 	// internal status
+	slideTimer : '',
+	slideTimerActive : false,
+	slideTimerCurrentDuration : 0,
 	currentSlide : 0,
 	currentStep : 0,
 	prevSlide : -1,
@@ -56,8 +59,8 @@ beamerJs = {
 					beamerJs.slideNavigationControls = options.navigation.controls;
 					beamerJs.hiddenStepsStyle = options.steps.hiddenstepsstyle;
 					beamerJs.hiddenStepsOpacity = options.steps.hiddenstepsopacity
-					beamerJs.slideTimerDefault = options.slidetimer.enabled;
-					beamerJs.enableSlideTimer = options.slidetimer.defaulttime;
+					beamerJs.slideTimerDefault = options.slidetimer.defaulttime;
+					beamerJs.enableSlideTimer = options.slidetimer.enabled;
 					beamerJs.tocMakeLinks = options.tableofcontents.makelinks;
 					// find all slides 
 					this.prepareSlides();
@@ -69,7 +72,7 @@ beamerJs = {
 					}
 					else {
 						// else render first slide
-						beamerJs.renderSlide(beamerJs.slides[0]);
+						beamerJs.showSlide(0);
 					}
 					
 					beamerJs.doShowSlidenumber();
@@ -112,6 +115,7 @@ beamerJs = {
 						slide.isTitleSlide = $(this).hasClass('titelslide');
 						slide.isTableOfContents = $(this).hasClass('tableofcontents');
 						slide.excludeFromTableOfContents = $(this).hasClass('tocexclude') || $(this).hasClass('tableofcontents');
+						slide.duration = beamerJs.getSlideDuration($(this).attr('class'));
 						if (slide.isTableOfContents) beamerJs.tocSlideNumber = slideCount;
 						slide.self = this;
 						slide.title = $(this).children('.title').html();
@@ -170,6 +174,7 @@ beamerJs = {
 					return steps;
 				},
 	showSlide :	function(num) {
+					beamerJs.stopSlideTimer();
 					if (beamerJs.enableSteps) {
 						if (num == 'next' && beamerJs.currentStep < beamerJs.slides[beamerJs.currentSlide].maxSteps -1 && beamerJs.slides[beamerJs.currentSlide].maxSteps > 1) {
 							beamerJs.hideStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep);
@@ -231,6 +236,7 @@ beamerJs = {
 					if (beamerJs.enableSteps) {
 						beamerJs.showStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep);
 					}
+					beamerJs.startSlideTimer((beamerJs.slides[beamerJs.currentSlide].duration));
 					return false;
 				},
 	showStep :	function(slide, step) {
@@ -527,9 +533,9 @@ beamerJs = {
 									switch (action) {
 										case 'ctrl_first': beamerJs.showSlide(0);break;
 										case 'ctrl_prev':beamerJs.showSlide('prev');break;
-										case 'ctrl_start':;break;
-										case 'ctrl_pause':;break;
-										case 'ctrl_next':beamerJs.showSlide('next');;break;
+										case 'ctrl_start':beamerJs.enableSlideTimer = true;beamerJs.startSlideTimer(beamerJs.slides[beamerJs.currentSlide].duration);break;
+										case 'ctrl_stop':beamerJs.stopSlideTimer();beamerJs.enableSlideTimer = false;break;
+										case 'ctrl_next':beamerJs.showSlide('next');break;
 										case 'ctrl_last':beamerJs.showSlide(beamerJs.slides.length - 1);break;
 										case 'ctrl_tableofcontents':beamerJs.tocCurrent = 0;beamerJs.showSlide(beamerJs.tocSlideNumber);break;
 									}
@@ -538,6 +544,41 @@ beamerJs = {
 									return false;
 								});
 							}
+						}
+					}
+				},
+	getSlideDuration : function(classString) {
+					// if duration class is defined
+					var duration = /duration-(\d+)/;
+					var result = duration.exec(classString);
+					if (result) {
+						return parseInt(result[1]);
+					}	
+					else {
+						// if the duration is not defined return the default
+						return beamerJs.slideTimerDefault;
+					}
+				},
+	startSlideTimer : function(duration) {
+					if (!beamerJs.slideTimerActive && beamerJs.enableSlideTimer) {
+						beamerJs.slideTimerCurrentDuration = duration;
+						beamerJs.slideTimerActive = true;
+						beamerJs.doSlideTimerTick();
+					 }
+				},
+	stopSlideTimer : function() {
+					if (beamerJs.slideTimerActive && beamerJs.enableSlideTimer) {
+						clearTimeout(beamerJs.slideTimer);
+						beamerJs.slideTimerActive = false;
+					}
+				},
+	doSlideTimerTick : function() {
+					if (beamerJs.enableSlideTimer) {
+						beamerJs.slideTimer = setTimeout('beamerJs.doSlideTimerTick()', 1000);
+						beamerJs.slideTimerCurrentDuration--;
+						if (beamerJs.slideTimerCurrentDuration == 0) {
+						 beamerJs.stopSlideTimer();
+						 beamerJs.showSlide('next');
 						}
 					}
 				}
