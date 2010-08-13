@@ -19,6 +19,8 @@ Release Notes
 * fixed some toc bugs
 * cleaned up init options
 * some cr template changes
+* added notifications
+* added slidetimer feature
 
 0.1.0
 
