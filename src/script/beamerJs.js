@@ -34,7 +34,6 @@ beamerJs = {
 	tocMakeLinks : false,
 	notificationEnabled : false,
 	notificationDuration : 2,
-	notificationAnimation : 'slide',
 	// internal status
 	notificationNumber : 0,
 	slideTimer : '',
@@ -68,7 +67,6 @@ beamerJs = {
 					beamerJs.tocMakeLinks = options.tableofcontents.makelinks;
 					beamerJs.motificationEnabled = options.notifications.enabled;
 					beamerJs.motificationDuration = options.notifications.duration;
-					beamerJs.motificationAnimation = options.notifications.animation;
 					// find all slides 
 					this.prepareSlides();
 					
@@ -543,7 +541,7 @@ beamerJs = {
 									switch (action) {
 										case 'ctrl_first': beamerJs.showSlide(0);break;
 										case 'ctrl_prev':beamerJs.showSlide('prev');break;
-										case 'ctrl_start':beamerJs.showNotification('Slidetimer started');beamerJs.enableSlideTimer = true;beamerJs.startSlideTimer(beamerJs.slides[beamerJs.currentSlide].duration);break;
+										case 'ctrl_start':beamerJs.showNotification('Slidetimer started','foo');beamerJs.enableSlideTimer = true;beamerJs.startSlideTimer(beamerJs.slides[beamerJs.currentSlide].duration);break;
 										case 'ctrl_stop':beamerJs.showNotification('Slidetimer stopped');beamerJs.stopSlideTimer();beamerJs.enableSlideTimer = false;break;
 										case 'ctrl_next':beamerJs.showSlide('next');break;
 										case 'ctrl_last':beamerJs.showSlide(beamerJs.slides.length - 1);break;
@@ -595,16 +593,20 @@ beamerJs = {
 						}
 					}
 				},
-	showNotification : function(text, nclass) {
-					if (!$('#notification-container').length) {
-						var ncont = '<div id="notification-container"></div>';
-						$('body').append(ncont);
+	showNotification : function(text, nclass, duration) {
+					if (beamerJs.motificationEnabled) {
+						nclass = (nclass)?' '+nclass:'';
+						duration = (duration == 'undefined' || !duration)?parseInt(beamerJs.notificationDuration*1000):parseInt(duration*1000);
+						if (!$('#notification-container').length) {
+							var ncont = '<div id="notification-container"></div>';
+							$('body').append(ncont);
+						}
+						var nid = 'notification-' + beamerJs.notificationNumber;
+						var notification = '<div id="' + nid + '" class="notification ' + nclass + '" style="display:none;">' + text + '</div>' 
+						$('#notification-container').append(notification);
+						$('#'+nid).fadeIn('slow');
+						setTimeout('$(\'#' + nid + '\').fadeOut(\'slow\')', duration);					
+						beamerJs.notificationNumber++;
 					}
-					var nid = 'notification-' + beamerJs.notificationNumber;
-					var notification = '<div id="' + nid + '" class="notification ' + nclass + '" style="display:none;">' + text + '</div>' 
-					$('#notification-container').append(notification);
-					$('#'+nid).fadeIn('slow');
-					setTimeout('$(\'#' + nid + '\').fadeOut(\'slow\')', beamerJs.notificationDuration * 1000);					
-					beamerJs.notificationNumber++;
 				}
 };
