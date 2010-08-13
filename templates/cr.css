@@ -130,9 +130,14 @@ a:hover {
 	background: transparent url(cr/tree.gif);
 }
 /*notifications*/
-.notification {
-	opacity:0.8;
+#notification-container {
 	position:fixed;
+	bottom:40px;
+	right:10px;
+}
+.notification {
+	position:relative;
+	opacity:0.8;
 	padding:15px;
 	background-color:#fff;
 	border: 2px solid #B00EC3;
@@ -140,6 +145,5 @@ a:hover {
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	width:200px;
-	bottom:60px;
-	right:10px;
+	margin:10px 0 10px 0;
 }

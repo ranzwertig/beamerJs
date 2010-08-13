@@ -596,9 +596,13 @@ beamerJs = {
 					}
 				},
 	showNotification : function(text, nclass) {
+					if (!$('#notification-container').length) {
+						var ncont = '<div id="notification-container"></div>';
+						$('body').append(ncont);
+					}
 					var nid = 'notification-' + beamerJs.notificationNumber;
 					var notification = '<div id="' + nid + '" class="notification ' + nclass + '" style="display:none;">' + text + '</div>' 
-					$('body').append(notification);
+					$('#notification-container').append(notification);
 					$('#'+nid).fadeIn('slow');
 					setTimeout('$(\'#' + nid + '\').fadeOut(\'slow\')', beamerJs.notificationDuration * 1000);					
 					beamerJs.notificationNumber++;
