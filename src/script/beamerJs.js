@@ -29,7 +29,7 @@ beamerJs = {
 	slideNavigationControls : 'first,prev,play,pause,next,last',
 	hiddenStepsStyle : 'hidden', // hidden, transparent
 	hiddenStepsOpacity : 0.3,
-	slideTimerDefault : 1,
+	slideTimerDefault : 3,
 	enableSlideTimer : false,
 	tocMakeLinks : false,
 	notificationEnabled : false,
