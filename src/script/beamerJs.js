@@ -32,7 +32,11 @@ beamerJs = {
 	slideTimerDefault : 1,
 	enableSlideTimer : false,
 	tocMakeLinks : false,
+	notificationEnabled : false,
+	notificationDuration : 2,
+	notificationAnimation : 'slide',
 	// internal status
+	notificationNumber : 0,
 	slideTimer : '',
 	slideTimerActive : false,
 	slideTimerCurrentDuration : 0,
@@ -59,9 +63,12 @@ beamerJs = {
 					beamerJs.slideNavigationControls = options.navigation.controls;
 					beamerJs.hiddenStepsStyle = options.steps.hiddenstepsstyle;
 					beamerJs.hiddenStepsOpacity = options.steps.hiddenstepsopacity
-					beamerJs.slideTimerDefault = options.slidetimer.defaulttime;
+					beamerJs.slideTimerDefault = options.slidetimer.defaultduration;
 					beamerJs.enableSlideTimer = options.slidetimer.enabled;
 					beamerJs.tocMakeLinks = options.tableofcontents.makelinks;
+					beamerJs.motificationEnabled = options.notifications.enabled;
+					beamerJs.motificationDuration = options.notifications.duration;
+					beamerJs.motificationAnimation = options.notifications.animation;
 					// find all slides 
 					this.prepareSlides();
 					
@@ -180,6 +187,7 @@ beamerJs = {
 							beamerJs.hideStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep);
 							beamerJs.showStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep + 1);
 							beamerJs.currentStep = beamerJs.currentStep + 1;
+							beamerJs.startSlideTimer((beamerJs.slides[beamerJs.currentSlide].duration));
 							return false;
 						}
 						if (num == 'prev' && beamerJs.currentStep > 0 && beamerJs.slides[beamerJs.currentSlide].maxSteps > 1) {
@@ -187,6 +195,8 @@ beamerJs = {
 							beamerJs.showStep(beamerJs.slides[beamerJs.currentSlide], beamerJs.currentStep - 1);
 							beamerJs.currentStep = beamerJs.currentStep - 1;
 							return false;
+							beamerJs.startSlideTimer((beamerJs.slides[beamerJs.currentSlide].duration));
+
 						}
 					}
 					beamerJs.prevSlide = beamerJs.currentSlide;
@@ -533,8 +543,8 @@ beamerJs = {
 									switch (action) {
 										case 'ctrl_first': beamerJs.showSlide(0);break;
 										case 'ctrl_prev':beamerJs.showSlide('prev');break;
-										case 'ctrl_start':beamerJs.enableSlideTimer = true;beamerJs.startSlideTimer(beamerJs.slides[beamerJs.currentSlide].duration);break;
-										case 'ctrl_stop':beamerJs.stopSlideTimer();beamerJs.enableSlideTimer = false;break;
+										case 'ctrl_start':beamerJs.showNotification('Slidetimer started');beamerJs.enableSlideTimer = true;beamerJs.startSlideTimer(beamerJs.slides[beamerJs.currentSlide].duration);break;
+										case 'ctrl_stop':beamerJs.showNotification('Slidetimer stopped');beamerJs.stopSlideTimer();beamerJs.enableSlideTimer = false;break;
 										case 'ctrl_next':beamerJs.showSlide('next');break;
 										case 'ctrl_last':beamerJs.showSlide(beamerJs.slides.length - 1);break;
 										case 'ctrl_tableofcontents':beamerJs.tocCurrent = 0;beamerJs.showSlide(beamerJs.tocSlideNumber);break;
@@ -578,8 +588,19 @@ beamerJs = {
 						beamerJs.slideTimerCurrentDuration--;
 						if (beamerJs.slideTimerCurrentDuration == 0) {
 						 beamerJs.stopSlideTimer();
+						 if (beamerJs.currentSlide >= beamerJs.slides.length -1) {
+							beamerJs.enableSlideTimer = false;
+						 }
 						 beamerJs.showSlide('next');
 						}
 					}
+				},
+	showNotification : function(text, nclass) {
+					var nid = 'notification-' + beamerJs.notificationNumber;
+					var notification = '<div id="' + nid + '" class="notification ' + nclass + '" style="display:none;">' + text + '</div>' 
+					$('body').append(notification);
+					$('#'+nid).fadeIn('slow');
+					setTimeout('$(\'#' + nid + '\').fadeOut(\'slow\')', beamerJs.notificationDuration * 1000);					
+					beamerJs.notificationNumber++;
 				}
 };

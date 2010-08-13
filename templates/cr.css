@@ -80,6 +80,7 @@ a:hover {
 	background: -webkit-gradient(linear, 0% 0%, 0% 50%, from(#FFFFFF), to(#EEEEEE));
 	-webkit-border-radius: 0.2em;
 	-moz-border-radius: 0.2em;
+	border-radius: 0.2em;
 }
 .exampleblock {
 	border: 1px solid #DDDDDD;
@@ -88,11 +89,13 @@ a:hover {
 	background: -webkit-gradient(linear, 0% 0%, 0% 50%, from(#FFFFFF), to(#FCE6FF));
 	-webkit-border-radius: 0.2em;
 	-moz-border-radius: 0.2em;
+	border-radius: 0.2em;
 }
 .alertblock {
 	border: 2px solid #B00EC3;
 	background:#fff;
 	-webkit-border-radius: 0.2em;
+	border-radius: 0.2em;
 	-moz-border-radius: 0.2em;
 }
 /*navigation styles*/
@@ -125,4 +128,18 @@ a:hover {
 }
 #ctrl_tableofcontents {
 	background: transparent url(cr/tree.gif);
+}
+/*notifications*/
+.notification {
+	opacity:0.8;
+	position:fixed;
+	padding:15px;
+	background-color:#fff;
+	border: 2px solid #B00EC3;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	width:200px;
+	bottom:60px;
+	right:10px;
 }
