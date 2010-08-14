@@ -358,7 +358,7 @@ beamerJs = {
 					
 				},
 	sizeSlide : function(slide) {
-					var winH, winW, slideH, slideW, space, padding , maxPadding, totalHeight, ratio;
+					var winH, winW, slideH, slideW, space, padding , maxPadding, totalHeight, ratio, hscale;
 					
 					maxPadding = 15;
 					padding = 15;
@@ -370,13 +370,24 @@ beamerJs = {
 					
 					winH = $(window).height();
 					winW = $(window).width();
-					
-					if (beamerJs.slideH > winH || beamerJs.slideH < winH - space) {
-						slideH = winH - space;
-						slideW = ( ( winH - space ) / 3 ) * 4;
+					if (winH / 3 > winW / 4) {
+						hscale = false;
+						if (beamerJs.slideW > winW || beamerJs.slideW < winW - space) {
+							slideW = winW - space;
+							slideH = ( ( winW - space) / 4 ) * 3;
+						}				
+						padding = padding * (winH / 600);	
+					}
+					else {
+						hscale = true;
+						if (beamerJs.slideH > winH || beamerJs.slideH < winH - space) {
+							slideH = winH - space;
+							slideW = ( ( winH - space ) / 3 ) * 4;
+						}
+						padding = padding * (winW / 800);
 					}
 					
-					padding = padding * (winH / 600);
+					
 					padding = (padding > maxPadding)?maxPadding:padding;
 					
 					$('header').css('padding', padding);
@@ -400,10 +411,17 @@ beamerJs = {
 					$(slide.self).css('margin', '0 auto');
 					$('footer').css('margin', '0 auto');
 					$('header').css('margin', '0 auto');
-					
-					$('body').css('padding-top', space / 2);
-					$('body').css('height', winH - space / 2);
-					$('body').css('font-size', (winH / 600) - 0.2 + 'em');
+					if (hscale) {
+						$('body').css('padding-top', space / 2);
+						$('body').css('height', winH - space / 2);
+						$('body').css('font-size', (winH / 600) - 0.2 + 'em');
+					}
+					else {
+						$('body').css('padding-top', space / 2);
+						$('body').css('height', winW - space / 2);
+						$('body').css('font-size', (winW / 800) - 0.2 + 'em');
+					}
+
 					
 					if (beamerJs.autoVCenterContent) {
 						var children = $(slide.self).children();
