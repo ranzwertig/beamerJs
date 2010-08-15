@@ -376,7 +376,8 @@ beamerJs = {
 							slideW = winW - space;
 							slideH = ( ( winW - space) / 4 ) * 3;
 						}				
-						padding = padding * (winH / 600);	
+						// todo win H
+						padding = padding * (slideH / 600);	
 					}
 					else {
 						hscale = true;
@@ -384,7 +385,8 @@ beamerJs = {
 							slideH = winH - space;
 							slideW = ( ( winH - space ) / 3 ) * 4;
 						}
-						padding = padding * (winW / 800);
+						//todo slideW
+						padding = padding * (slideW / 800);
 					}
 					
 					
@@ -400,8 +402,9 @@ beamerJs = {
 					beamerJs.slideH = slideH - ( slideH * 0.09 ) - ( slideH * 0.1 ) - padding * 2;
 					$(slide.self).css('height', beamerJs.slideH);
 					
-					$('footer').css('height', slideH * 0.09 - padding * 2);
-					$('header').css('height', slideH * 0.1 - padding * 2);
+					//TODO: test change
+					$('footer').css('height', beamerJs.slideH * 0.09 - padding * 2);
+					$('header').css('height', beamerJs.slideH * 0.1 - padding * 2);
 					
 					$('footer').css('width', slideW - padding * 2);
 					$('header').css('width', slideW - padding * 2);

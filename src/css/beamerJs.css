@@ -74,6 +74,7 @@ body {
 	font-size:1.3em;
 	overflow:hidden;
 	line-height:1.3em;
+    padding:1em;
 }
 .slide p {
 		line-height:1.3em;
@@ -83,8 +84,10 @@ section {
 }
 header {
 	display:block;
+	padding:1em;
 }
 footer {
+	padding:1em;
 	display:block;
 }
 .title, .subtitle {
