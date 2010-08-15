@@ -361,7 +361,7 @@ beamerJs = {
 					var winH, winW, slideH, slideW, space, padding , maxPadding, totalHeight, ratio, hscale;
 					
 					maxPadding = 15;
-					padding = 15;
+					padding = 10;
 					
 					space = 100;
 					

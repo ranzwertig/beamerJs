@@ -83,11 +83,9 @@ section {
 }
 header {
 	display:block;
-	height:30px;
 }
 footer {
 	display:block;
-	height:30px;
 }
 .title, .subtitle {
 	display:none;
